@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training Session System</title>
+</head>
+<body>
+    <div>
+        <h2>تفاصيل الحصة التدريبية</h2>
+        <p>اسم العميل: <input type="text" id="clientName" placeholder="أدخل الاسم هنا"></p>
+        <p>المهارات التي ستُدرّب اليوم: <input type="text" id="skills" placeholder="المهارات هنا..."></p>
+        <p>الملاحظات: <textarea id="notes"></textarea></p>
+    </div>
+    
+    <button onclick="endSession()">إنهاء الحصة</button>
+    <button onclick="rateClient()">تقييم العميل</button>
+    <button onclick="shareNotes()">مشاركة الملاحظات</button>
+
+    <script>
+        // تابع لإنهاء الحصة
+        function endSession() {
+            let clientName = document.getElementById("clientName").value;
+            let notes = document.getElementById("notes").value;
+            alert("تم إنهاء الحصة للعميل: " + clientName + "\nالملاحظات: " + notes);
+        }
+
+        // تابع لتقييم العميل
+        function rateClient() {
+            let rating = prompt("من فضلك، قيم العميل من نجمة إلى 5 نجوم (1-5):");
+            if (rating >= 1 && rating <= 5) {
+                alert("تقييم العميل هو: " + rating + " نجوم.");
+            } else {
+                alert("تقييم غير صحيح، يرجى المحاولة مرة أخرى بين 1 و5.");
+            }
+        }
+
+        // تابع لمشاركة الملاحظات عبر الواتساب
+        function shareNotes() {
+            let clientName = document.getElementById("clientName").value;
+            let notes = document.getElementById("notes").value;
+            if (notes) {
+                let whatsappMessage = `ملاحظات الحصة للعميل ${clientName}: \n${notes}`;
+                let whatsappUrl = `https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`;
+                window.open(whatsappUrl, "_blank");
+            } else {
+                alert("يرجى إضافة ملاحظات أولاً قبل مشاركتها.");
+            }
+        }
+    </script>
+</body>
+</html>
